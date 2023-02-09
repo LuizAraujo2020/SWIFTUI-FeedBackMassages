@@ -11,7 +11,28 @@ import SwiftUI
 struct SWIFTUI_FeedBackMassagesApp: App {
     var body: some Scene {
         WindowGroup {
-            ContentView()
+            
+                TabView {
+                    ContentView()
+                        .tabItem {
+                            Label("Menu", systemImage: "list.dash")
+                        }
+                    
+                    WholeMessageView(usersViewModel: UsersViewModel())
+                        .tabItem {
+                            Label("Whole", systemImage: "photo.on.rectangle")
+                        }
+                    
+                    AlertMessageView()
+                        .tabItem {
+                            Label("Alert", systemImage: "exclamationmark.triangle.fill")
+                        }
+                    
+                    ToastMessageView()
+                        .tabItem {
+                            Label("Toast", systemImage: "envelope.arrow.triangle.branch.fill")
+                        }
+                }
         }
     }
 }
