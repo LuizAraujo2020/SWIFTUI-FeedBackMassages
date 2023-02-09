@@ -20,7 +20,7 @@ struct WholeMessageView: View {
             } else {
                 ZStack {
                     List(wholeMessageView.listUsers, id: \.self) { user in
-                        Text(user)
+                        Text(user.name)
                     }
                     
                     if let error = wholeMessageView.userError { // << error handling here

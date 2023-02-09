@@ -21,6 +21,7 @@
 		6F1B798B2995552D00D94E1C /* APIService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6F1B798A2995552D00D94E1C /* APIService.swift */; };
 		6F1B798D2995596900D94E1C /* FetchOptionsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6F1B798C2995596900D94E1C /* FetchOptionsView.swift */; };
 		6F1B798F29955A7900D94E1C /* WholeMessageViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6F1B798E29955A7900D94E1C /* WholeMessageViewModel.swift */; };
+		6F1B799129955F2B00D94E1C /* User.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6F1B799029955F2B00D94E1C /* User.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -39,6 +40,7 @@
 		6F1B798A2995552D00D94E1C /* APIService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = APIService.swift; sourceTree = "<group>"; };
 		6F1B798C2995596900D94E1C /* FetchOptionsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FetchOptionsView.swift; sourceTree = "<group>"; };
 		6F1B798E29955A7900D94E1C /* WholeMessageViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WholeMessageViewModel.swift; sourceTree = "<group>"; };
+		6F1B799029955F2B00D94E1C /* User.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = User.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -105,6 +107,7 @@
 		6F1B7973299535CB00D94E1C /* Model */ = {
 			isa = PBXGroup;
 			children = (
+				6F1B799029955F2B00D94E1C /* User.swift */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -240,6 +243,7 @@
 				6F1B796429951D1900D94E1C /* ContentView.swift in Sources */,
 				6F1B798B2995552D00D94E1C /* APIService.swift in Sources */,
 				6F1B7983299539E700D94E1C /* ToastMessageView.swift in Sources */,
+				6F1B799129955F2B00D94E1C /* User.swift in Sources */,
 				6F1B796229951D1900D94E1C /* SWIFTUI_FeedBackMassagesApp.swift in Sources */,
 				6F1B79802995393800D94E1C /* AlertMessageView.swift in Sources */,
 				6F1B798D2995596900D94E1C /* FetchOptionsView.swift in Sources */,
