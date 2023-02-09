@@ -15,10 +15,9 @@ final class APIService {
     init () { }
     
 
-    func loadData(completion:@escaping ([UserElement]) -> ()) {
+    func loadData(url: String, completion:@escaping ([UserElement]) -> ()) {
         
-        let url = URL(string: "https://jsonplaceholder.typicode.com/users")!
-        guard let url = URL(string: "https://jsonplaceholder.typicode.com/users") else {
+        guard let url = URL(string: url) else {
             print("Invalid url...")
             return
         }
