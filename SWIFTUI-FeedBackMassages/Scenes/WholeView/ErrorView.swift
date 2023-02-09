@@ -8,13 +8,13 @@
 import SwiftUI
 
 struct ErrorView: View {
-
+    
     let errorTitle: String
-//    @ObservedObject var usersViewModel: UsersViewModel
+    let perform: () -> Void
     
     var body: some View {
         RoundedRectangle(cornerRadius: 20)
-            .foregroundColor(.red)
+            .foregroundStyle(.gray)
             .overlay {
                 
                 VStack {
@@ -22,12 +22,10 @@ struct ErrorView: View {
                         .font(.largeTitle)
                         .foregroundColor(.white)
                     
-                    Button("Reload Users") {
-                        Task {
-//                            await usersViewModel.loadUsers(withError: false)
-                        }
+                    CompButtonRegular(title: "Reload Users",
+                                      color: .red) {
+                        perform()
                     }
-                    .buttonStyle(.borderedProminent)
                 }
                 
             }
@@ -37,6 +35,6 @@ struct ErrorView: View {
 
 struct ErrorView_Previews: PreviewProvider {
     static var previews: some View {
-        ErrorView(errorTitle: "Error"/*, usersViewModel: UsersViewModel()*/)
+        ErrorView(errorTitle: "Error") { }
     }
 }

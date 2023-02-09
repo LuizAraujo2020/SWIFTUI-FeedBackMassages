@@ -8,8 +8,9 @@
 import SwiftUI
 
 struct WholeMessageView: View {
-    
+    @EnvironmentObject var appState: AppState
     @StateObject var wholeMessageViewModel = WholeMessageViewModel()
+    
 //    @State var showError = false
     
     var body: some View {
@@ -32,25 +33,43 @@ struct WholeMessageView: View {
                 FetchOptionsView(actionWithoutError: {
                     Task {
 //                    try? await Task.sleep(for: .seconds(2)) // timer to fake the network request
-                        await wholeMessageViewModel.loadUsers(withError: false) // calling the fake function with error
+                        loadUsers(withError: false) // calling the fake function with error
                     }
                     
                 }, actionWithError: {
-                    Task {
-                        await wholeMessageViewModel.loadUsers(withError: true) // calling the fake function with error
-                    }
+                    
+                    loadUsers(withError: true)
                 })
             }
             .padding(.bottom)
             
             if let error = wholeMessageViewModel.userError { // << error handling here
-                ErrorView(errorTitle: error.description)
+                ErrorView(errorTitle: error.description) {
+                    loadUsers(withError: false)
+                }
                 
+            }
+            
+            if appState.isBusy {
+                ProgressView()
             }
         }
 //        .onChange(of: wholeMessageView.userError) { newValue in
 //            showError = newValue == nil ?  false : true
 //        }
+        
+        
+    }
+    
+    private func loadUsers(withError: Bool) {
+        
+        Task {
+            appState.isBusy = true
+            try? await Task.sleep(for: .seconds(2)) // timer to fake the network request
+            await wholeMessageViewModel.loadUsers(withError: withError)
+            
+            appState.isBusy = false
+        }
     }
 }
 
