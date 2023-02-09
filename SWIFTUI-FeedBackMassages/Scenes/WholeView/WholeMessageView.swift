@@ -9,52 +9,53 @@ import SwiftUI
 
 struct WholeMessageView: View {
     
-    @ObservedObject var usersViewModel: UsersViewModel
+    @StateObject var wholeMessageView = WholeMessageViewModel()
     
     var body: some View {
         VStack {
-            if usersViewModel.listUsers.isEmpty {
+            if wholeMessageView.listUsers.isEmpty {
                 EmptyViewPlaceholder(type: .user)
                     .opacity(0.5)
                 
             } else {
                 ZStack {
-                    List(usersViewModel.listUsers, id: \.self) { user in
+                    List(wholeMessageView.listUsers, id: \.self) { user in
                         Text(user)
                     }
                     
-                    if let error = usersViewModel.userError { // << error handling here
-                        ErrorView(errorTitle: error.description, usersViewModel: usersViewModel)
+                    if let error = wholeMessageView.userError { // << error handling here
+                        ErrorView(errorTitle: error.description)
                     }
                 }
                 .task {
                     try? await Task.sleep(for: .seconds(2)) // timer to fake the network request
-                    await usersViewModel.loadUsers(withError: true) // calling the fake function with error
+                    await wholeMessageView.loadUsers(withError: true) // calling the fake function with error
                 }
             }
             
             // MARK: Buttons
-            VStack {
-                Text("Fetch")
-                    .font(.title)
+            /// Usually the fetch would be on the `onAppear` or `.task`...
+            /// Made this way to chose wether would throw an error or not.
+            FetchOptionsView(actionWithoutError: {
+                Task {
+                    try? await Task.sleep(for: .seconds(2)) // timer to fake the network request
+                    await wholeMessageView.loadUsers(withError: false) // calling the fake function with error
+                }
                 
-                HStack {
-                    CompButtonRegular(title: "No error", color: .green) { }
-                    CompButtonRegular(title: "Random error", color: .red) { }
+            })
+            {
+                Task {
+                    try? await Task.sleep(for: .seconds(2)) // timer to fake the network request
+                    await wholeMessageView.loadUsers(withError: true) // calling the fake function with error
                 }
             }
-            .padding()
-            .background(
-                RoundedRectangle(cornerRadius: 12)
-                    .foregroundStyle(.ultraThickMaterial)
-                    .shadow(radius: 12)
-            )
         }
+        .padding(.bottom)
     }
 }
 
 struct WholeView_Previews: PreviewProvider {
     static var previews: some View {
-        WholeMessageView(usersViewModel: UsersViewModel())
+        WholeMessageView()
     }
 }

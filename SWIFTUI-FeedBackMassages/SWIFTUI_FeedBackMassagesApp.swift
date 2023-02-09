@@ -18,7 +18,7 @@ struct SWIFTUI_FeedBackMassagesApp: App {
                             Label("Menu", systemImage: "list.dash")
                         }
                     
-                    WholeMessageView(usersViewModel: UsersViewModel())
+                    WholeMessageView()
                         .tabItem {
                             Label("Whole", systemImage: "photo.on.rectangle")
                         }

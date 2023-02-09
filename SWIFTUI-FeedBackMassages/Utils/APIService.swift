@@ -14,7 +14,9 @@ final class APIService {
     
     init () { }
     
-    func getRequest<T: Codable>(url: URL, type: T.Type, completionHandler: @escaping (T) -> Void, errorHandler: @escaping (String) -> Void) {
+    func getRequest<T: Codable>(url: URL, type: T.Type,
+                                completionHandler: @escaping (T) -> Void,
+                                errorHandler: @escaping (String) -> Void) {
         
         let task = URLSession.shared.dataTask(with: url) { (data, response, error) in
             guard let data = data, error == nil else {

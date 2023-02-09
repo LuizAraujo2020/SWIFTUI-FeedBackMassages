@@ -1,13 +1,14 @@
 //
-//  UsersViewModel.swift
+//  WholeMessageViewModel.swift
 //  SWIFTUI-FeedBackMassages
 //
 //  Created by Luiz Araujo on 09/02/23.
 //
 
-import SwiftUI
+import Foundation
 
-class UsersViewModel: ObservableObject {
+final class WholeMessageViewModel: ObservableObject {
+    
     @Published var listUsers = [String]()
     @Published var userError: UserError? = nil
     

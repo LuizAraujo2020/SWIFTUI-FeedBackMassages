@@ -10,7 +10,7 @@ import SwiftUI
 struct ErrorView: View {
 
     let errorTitle: String
-    @ObservedObject var usersViewModel: UsersViewModel
+//    @ObservedObject var usersViewModel: UsersViewModel
     
     var body: some View {
         RoundedRectangle(cornerRadius: 20)
@@ -24,7 +24,7 @@ struct ErrorView: View {
                     
                     Button("Reload Users") {
                         Task {
-                            await usersViewModel.loadUsers(withError: false)
+//                            await usersViewModel.loadUsers(withError: false)
                         }
                     }
                     .buttonStyle(.borderedProminent)
@@ -37,6 +37,6 @@ struct ErrorView: View {
 
 struct ErrorView_Previews: PreviewProvider {
     static var previews: some View {
-        ErrorView(errorTitle: "Error", usersViewModel: UsersViewModel())
+        ErrorView(errorTitle: "Error"/*, usersViewModel: UsersViewModel()*/)
     }
 }
