@@ -8,14 +8,31 @@
 import SwiftUI
 
 struct ContentView: View {
+    @ObservedObject var usersViewModel = UsersViewModel()
+    
     var body: some View {
-        VStack {
-            Image(systemName: "globe")
-                .imageScale(.large)
-                .foregroundColor(.accentColor)
-            Text("Hello, world!")
+        TabView {
+            ContentView()
+                .tabItem {
+                    Label("Menu", systemImage: "list.dash")
+                }
+            
+            WholeMessageView(usersViewModel: usersViewModel)
+                .tabItem {
+                    Label("Whole", systemImage: "photo.on.rectangle")
+                }
+            
+            AlertMessageView()
+                .tabItem {
+                    Label("Alert", systemImage: "exclamationmark.triangle.fill")
+                }
+            
+            ToastMessageView()
+                .tabItem {
+                    Label("Alert", systemImage: "exclamationmark.triangle.fill")
+                }
         }
-        .padding()
+        
     }
 }
 
