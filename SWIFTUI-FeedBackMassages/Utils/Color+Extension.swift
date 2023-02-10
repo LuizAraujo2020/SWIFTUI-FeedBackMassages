@@ -1,5 +1,5 @@
 //
-//  Color+DesingSystem+Extension.swift
+//  Color+Extension.swift
 //  TravelApp
 //
 //  Created by Thiago de Oliveira Sousa on 26/09/22.
@@ -62,5 +62,9 @@ extension Color {
     static let successLight  = Color(red: 112/255, green: 223/255, blue: 45/255)
     static let successMedium = Color(red: 96/255, green: 166/255, blue: 54/255)
     static let successDark = Color(red: 40/255, green: 103/255, blue: 1/255)
+    
+    
+    // LoadView
+    static let pillColor: Color = Color(red: 242/255, green: 53/255, blue: 174/255)
 }
 
