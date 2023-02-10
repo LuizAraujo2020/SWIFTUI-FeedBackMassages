@@ -10,7 +10,7 @@ import Foundation
 
 final class AlertMessageViewModel: ObservableObject {
     
-    @Published var listPosts = [PostElement]()
+    @Published var listPosts = Posts()
     @Published var userError: RequestError?
     
     private let url = "https://jsonplaceholder.typicode.com/posts"
@@ -23,7 +23,7 @@ final class AlertMessageViewModel: ObservableObject {
             
         } else {
             Task(priority: .background) {
-                let result = await APIService.shared.sendRequest(url: url, responseModel: [PostElement].self)
+                let result = await APIService.shared.sendRequest(url: url, responseModel: Posts.self)
                 switch result {
                 case .success(let movieResponse):
                     listPosts = movieResponse

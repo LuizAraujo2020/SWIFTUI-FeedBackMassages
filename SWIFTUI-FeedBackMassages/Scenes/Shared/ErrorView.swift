@@ -26,7 +26,6 @@ struct ErrorView: View {
                     perform()
                 }
             }
-            
         }
     }
 }

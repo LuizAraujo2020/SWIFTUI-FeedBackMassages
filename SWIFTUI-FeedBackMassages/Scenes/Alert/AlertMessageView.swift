@@ -15,7 +15,7 @@ struct AlertMessageView: View {
         ZStack {
             VStack {
                 if alertMessageViewModel.listPosts.isEmpty {
-                    EmptyViewPlaceholder(type: .user)
+                    EmptyViewPlaceholder(type: .posts)
                         .opacity(0.5)
                     
                 } else {
@@ -39,8 +39,7 @@ struct AlertMessageView: View {
                 })
             }
             .padding(.bottom)
-            
-            
+             
             if appState.isBusy {
                 LoadingView()
             }
@@ -69,7 +68,7 @@ struct AlertMessageView: View {
         Task {
             appState.isBusy = true
             
-            try? await Task.sleep(for: .seconds(Constants.Animations.randomDuration)) // timer to fake the network request
+            try? await Task.sleep(for: .seconds(Constants.Animations.randomDuration))
             await alertMessageViewModel.loadComments(withError: withError)
             
             appState.isBusy = false

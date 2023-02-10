@@ -114,7 +114,7 @@ struct Company: Codable, Equatable {
     }
 }
 
-typealias User = [UserElement]
+typealias Users = [UserElement]
 @propertyWrapper public struct NilOnFail<T: Codable>: Codable {
     
     public let wrappedValue: T?

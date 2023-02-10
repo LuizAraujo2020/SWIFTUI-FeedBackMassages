@@ -9,7 +9,7 @@ import Foundation
 
 final class WholeMessageViewModel: ObservableObject {
     
-    @Published var listUsers = [UserElement]()
+    @Published var listUsers = Users()
     @Published var userError: UserError?
     
     @MainActor
@@ -26,17 +26,6 @@ final class WholeMessageViewModel: ObservableObject {
             }
             
             userError = nil
-        }
-    }
-}
-
-enum UserError: Error {
-    case failedLoading
-    
-    var description: String {
-        switch self {
-        case .failedLoading:
-            return "🥹\n \n Sorry, we couldn't retrieve users. \n \n Come back in few minutes.\n \n "
         }
     }
 }

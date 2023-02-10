@@ -1,5 +1,5 @@
 //
-//  Comment.swift
+//  Post.swift
 //  SWIFTUI-FeedBackMassages
 //
 //  Created by Luiz Araujo on 10/02/23.
@@ -8,7 +8,7 @@
 // This file was generated from JSON Schema using quicktype, do not modify it directly.
 // To parse the JSON, add this file to your project and do:
 //
-//   let comment = try? JSONDecoder().decode(Comment.self, from: jsonData)
+//   let post = try? JSONDecoder().decode(Post.self, from: jsonData)
 
 //
 // Hashable or Equatable:
@@ -18,21 +18,19 @@
 
 import Foundation
 
-// MARK: - CommentElement
-struct CommentElement: Codable, Equatable {
-    let postId: Int
+// MARK: - PostElement
+struct PostElement: Codable, Hashable  {
+    let userId: Int
     let id: Int
-    let name: String
-    let email: String
+    let title: String
     let body: String
 
     enum CodingKeys: String, CodingKey {
-        case postId = "postId"
-        case id = "id"
-        case name = "name"
-        case email = "email"
-        case body = "body"
+        case userId = "userId"
+        case id     = "id"
+        case title  = "title"
+        case body   = "body"
     }
 }
 
-typealias Comment = [CommentElement]
+typealias Posts = [PostElement]
