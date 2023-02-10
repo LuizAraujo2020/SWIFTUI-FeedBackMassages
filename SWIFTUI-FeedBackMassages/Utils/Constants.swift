@@ -12,5 +12,7 @@ struct Constants {
         static var duration     = Double(2.0)
         static var startDegrees = Double(0.0)
         static var endDegrees   = Double(1080.0)
+        
+        static let fileNameloading = "loading"
     }
 }

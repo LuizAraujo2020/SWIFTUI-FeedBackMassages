@@ -204,9 +204,9 @@
 		6F1B7989299554F900D94E1C /* Utils */ = {
 			isa = PBXGroup;
 			children = (
+				6F1B798A2995552D00D94E1C /* APIService.swift */,
 				6F09344729958550004A44B4 /* Color+Extension.swift */,
 				6F09344B29959833004A44B4 /* Constants.swift */,
-				6F1B798A2995552D00D94E1C /* APIService.swift */,
 				6F093440299583C1004A44B4 /* View+Extension.swift */,
 			);
 			path = Utils;
