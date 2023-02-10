@@ -51,7 +51,8 @@ struct WholeMessageView: View {
             }
             
             if appState.isBusy {
-                ProgressView()
+//                ProgressView()
+                LoadingView()
             }
         }
 //        .onChange(of: wholeMessageView.userError) { newValue in

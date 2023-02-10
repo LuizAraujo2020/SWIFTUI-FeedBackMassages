@@ -65,6 +65,6 @@ extension Color {
     
     
     // LoadView
-    static let pillColor: Color = Color(red: 242/255, green: 53/255, blue: 174/255)
+    static let textLightGray: Color = Color(red: 210/255, green: 210/255, blue: 210/255)
 }
 
