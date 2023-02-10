@@ -8,6 +8,8 @@
 import SwiftUI
 
 struct CompCardBackground: View {
+    let rounded: Bool
+    
     var body: some View {
         GeometryReader { geo in
             let smallest = geo.size.width <= geo.size.height ? geo.size.width : geo.size.height
@@ -18,7 +20,7 @@ struct CompCardBackground: View {
     
     @ViewBuilder
     private func createBackground(size: CGFloat) -> some View {
-        RoundedRectangle(cornerRadius: size * 0.1)
+        RoundedRectangle(cornerRadius: rounded ? size * 0.1 : 0.0)
             .foregroundStyle(Color.darkModeDark)
             .opacity(0.8)
     }
@@ -26,6 +28,7 @@ struct CompCardBackground: View {
 
 struct CompCardBackground_Previews: PreviewProvider {
     static var previews: some View {
-        CompCardBackground()
+//        CompCardBackground(rounded: true)
+        CompCardBackground(rounded: false)
     }
 }

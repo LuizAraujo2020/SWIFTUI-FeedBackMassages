@@ -11,8 +11,6 @@ struct WholeMessageView: View {
     @EnvironmentObject var appState: AppState
     @StateObject var wholeMessageViewModel = WholeMessageViewModel()
     
-//    @State var showError = false
-    
     var body: some View {
         ZStack {
             VStack {
@@ -51,29 +49,26 @@ struct WholeMessageView: View {
             }
             
             if appState.isBusy {
-//                ProgressView()
                 LoadingView()
             }
         }
 //        .onChange(of: wholeMessageView.userError) { newValue in
 //            showError = newValue == nil ?  false : true
 //        }
-        
-        
+        .animation(.easeInOut, value: appState.isBusy)
+        .animation(.easeInOut, value: appState.showCard)
+        .animation(.easeInOut, value: wholeMessageViewModel.listUsers)
     }
     
     private func loadUsers(withError: Bool) {
         
         Task {
-            withAnimation {
-                appState.isBusy = true
-            }
+            appState.isBusy = true
+            
             try? await Task.sleep(for: .seconds(Constants.Animations.randomDuration)) // timer to fake the network request
             await wholeMessageViewModel.loadUsers(withError: withError)
             
-            withAnimation {
-                appState.isBusy = false
-            }
+            appState.isBusy = false
         }
     }
 }

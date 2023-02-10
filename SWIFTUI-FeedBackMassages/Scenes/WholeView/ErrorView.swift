@@ -13,28 +13,26 @@ struct ErrorView: View {
     let perform: () -> Void
     
     var body: some View {
-        RoundedRectangle(cornerRadius: 20)
-            .foregroundStyle(.gray)
-            .overlay {
+        ZStack {
+            CompCardBackground(rounded: false)
+            
+            VStack {
+                Text(errorTitle)
+                    .font(.largeTitle)
+                    .foregroundColor(.white)
+                    .multilineTextAlignment(.center)
                 
-                VStack {
-                    Text(errorTitle)
-                        .font(.largeTitle)
-                        .foregroundColor(.white)
-                    
-                    CompButtonRegular(title: "Reload Users",
-                                      color: .red) {
-                        perform()
-                    }
+                CompButtonRegular(title: "Try again", color: .red) {
+                    perform()
                 }
-                
             }
+            
+        }
     }
-    
 }
 
 struct ErrorView_Previews: PreviewProvider {
     static var previews: some View {
-        ErrorView(errorTitle: "Error") { }
+        ErrorView(errorTitle: Constants.Texts.loremMicro) { }
     }
 }

@@ -36,7 +36,7 @@ enum UserError: Error {
     var description: String {
         switch self {
         case .failedLoading:
-            return "Sorry, we couldn't retrieve users. \n Try again later. ☹️"
+            return "🥹\n \n Sorry, we couldn't retrieve users. \n \n Come back in few minutes.\n \n "
         }
     }
 }
