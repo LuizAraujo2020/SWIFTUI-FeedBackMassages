@@ -45,7 +45,7 @@ struct WholeMessageView: View {
                 ErrorView(errorTitle: error.description) {
                     loadUsers(withError: false)
                 }
-                
+                .ignoresSafeArea()
             }
             
             if appState.isBusy {
@@ -76,5 +76,6 @@ struct WholeMessageView: View {
 struct WholeView_Previews: PreviewProvider {
     static var previews: some View {
         WholeMessageView()
+            .environmentObject(AppState())
     }
 }
