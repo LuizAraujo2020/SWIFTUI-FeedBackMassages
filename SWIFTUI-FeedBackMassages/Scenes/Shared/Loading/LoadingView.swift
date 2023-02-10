@@ -12,9 +12,9 @@ struct LoadingView: View {
     var body: some View {
         GeometryReader { geo in
             /// The smallest dimension.
-            ///
             let smallest = geo.size.width <= geo.size.height ? geo.size.width : geo.size.height
-            /// The size of the content.
+           
+            /// The size of the content. To make sure it doesn't cover all the space availabe and doesn't get off screen.
             let contentSize = CGSize(width: smallest * 0.75, height: smallest)
             
             ZStack {
@@ -26,7 +26,7 @@ struct LoadingView: View {
             }
             .frame(width: contentSize.width, height: contentSize.height)
             .position(x: geo.size.width * 0.5, y: geo.size.height * 0.5)
-        } /// Geo
+        } /// end: Geo
     }
     
     @ViewBuilder

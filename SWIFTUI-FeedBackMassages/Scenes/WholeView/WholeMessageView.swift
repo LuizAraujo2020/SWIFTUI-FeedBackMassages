@@ -65,11 +65,15 @@ struct WholeMessageView: View {
     private func loadUsers(withError: Bool) {
         
         Task {
-            appState.isBusy = true
-            try? await Task.sleep(for: .seconds(2)) // timer to fake the network request
+            withAnimation {
+                appState.isBusy = true
+            }
+            try? await Task.sleep(for: .seconds(Constants.Animations.randomDuration)) // timer to fake the network request
             await wholeMessageViewModel.loadUsers(withError: withError)
             
-            appState.isBusy = false
+            withAnimation {
+                appState.isBusy = false
+            }
         }
     }
 }
