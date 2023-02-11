@@ -1,5 +1,7 @@
 # SwiftUI Feedback Messages
 
+<br />
+
 [![Swift Version][swift-image]][swift-url] [![Build Status][travis-image]][travis-url] [![License][license-image]][license-url] [![PRs Welcome](https://img.shields.io/badge/PRs-welcome-brightgreen.svg?style=flat-square)](http://makeapullrequest.com)
 
 
@@ -49,12 +51,14 @@
 
 #### SPM Dependecy
 - Lottie:  [lottie-ios](github.com/airbnb/lottie-ios.git)
- 
+
+<br />
+
 ## Contribute
 
 We would love you for the contribution to my practice, is there something wrong? Or that you would do differently?
 
-  
+<br />
 
 ## Meta
 Luiz Araujo – [@YourTwitter](https://twitter.com/dbader_org) – YourEmail@example.com
@@ -87,13 +91,7 @@ Distributed under the XYZ license. See ``LICENSE`` for more information.
 
   
 
-  
-
-  
-
-  
-
-  
+<br />
 
 ## Resource:
 
