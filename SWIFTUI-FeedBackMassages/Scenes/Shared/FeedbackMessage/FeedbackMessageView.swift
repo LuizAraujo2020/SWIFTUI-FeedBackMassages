@@ -34,7 +34,7 @@ struct FeedbackMessageView: View {
         .shadow(radius: 20)
         .scaleEffect(CGSize(width: 0.5, height: 0.5))
         .onTapGesture {
-            print("🎁isRotating: \(isRotating)")
+
             if isRotating {
                 isRotating = false
                 
@@ -45,7 +45,6 @@ struct FeedbackMessageView: View {
         .task {
             try? await Task.sleep(for: .seconds(Constants.Animations.duration))
             isRotating = false
-            print("isRotating: \(isRotating)")
         }
         .onAppear {
             degrees = Constants.Animations.endDegrees
@@ -67,13 +66,11 @@ struct FeedbackMessageView: View {
                 .shadow(radius: 1)
                 .foregroundColor(.white)
         }
-        //        .background(.gray)
         .frame(height: sizeStandard * 2)
     }
     
     @ViewBuilder
     private func createBackgroundBadge() -> some View {
-        //        guard let message = appState.message else { return }
         
         switch message.type {
         case .successful:
@@ -166,24 +163,18 @@ struct ErrorMessageView: View {
                     FeedbackMessageView(showMessage: $showMessage, message: msg)
                 }
             }
-//            .animation(.easeInOut, value: appState.showMessage)
-//            .onAppear {
-//                appState.message = .init(type: .allCases.randomElement()!, message: "Opa! Deu alguma coisa!")
-//            }
             .onChange(of: appState.message) { newValue in
                 showMessage = newValue != nil
             }
         }
     }
     
-    
-    
     fileprivate func rotateMessage() {
         showMessage.toggle()
         
         if showMessage {
-            appState.message = .init(type: .allCases.randomElement()!, message: "Opa! Deu alguma coisa!")
-            
+            appState.message = .init(type: .allCases.randomElement()!,
+                                     message: "Opa! Deu alguma coisa!")
         }
     }
 }

@@ -21,7 +21,6 @@ struct FetchOptionsView: View {
                 .font(.caption)
                 .padding(.bottom)
             
-            
             HStack {
                 CompButtonRegular(title: "No error", color: .green) { actionWithoutError() }
                 CompButtonRegular(title: "With error", color: .red) { actionWithError() }

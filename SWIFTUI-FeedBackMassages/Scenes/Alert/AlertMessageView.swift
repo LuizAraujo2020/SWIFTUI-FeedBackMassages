@@ -47,7 +47,6 @@ struct AlertMessageView: View {
         }
         .onChange(of: alertMessageViewModel.userError, perform: { newValue in
             if newValue != nil {
-//                showMessage = true
                 appState.message = .init(error: alertMessageViewModel.userError!)
             }
         })

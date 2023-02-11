@@ -14,7 +14,7 @@ final class APIService {
     
     init () { }
     
-
+    
     func loadData<T: Codable>(url: String, completion:@escaping (T) -> ()) {
         
         guard let url = URL(string: url) else {

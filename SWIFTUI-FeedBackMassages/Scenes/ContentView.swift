@@ -8,7 +8,6 @@
 import SwiftUI
 
 struct ContentView: View {
-//    @StateObject var usersViewModel = UsersViewModel()
     
     var body: some View {
         Text("ContentView")

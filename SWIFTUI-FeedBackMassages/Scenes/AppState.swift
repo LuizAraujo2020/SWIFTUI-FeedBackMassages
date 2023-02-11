@@ -9,8 +9,6 @@ import Foundation
 
 @MainActor
 class AppState: ObservableObject {
-//    /// Navigation
-//    @Published var path = NavigationPath()
     
 //    /// State of user
 //    @Published var isLoggedIn = false
@@ -18,7 +16,6 @@ class AppState: ObservableObject {
     @Published var isBusy = false
     
     /// User Feedback
-//    @Published var showMessage = false
     var message: FeedbackMessage?
     
 //    /// Signing With Apple

@@ -1,5 +1,5 @@
 //
-//  Errors.swift
+//  FeedbackMessage.swift
 //  SWIFTUI-FeedBackMassages
 //
 //  Created by Luiz Araujo on 09/02/23.
@@ -11,18 +11,6 @@ protocol MessageCardfiable: Equatable, Hashable {
     var type: TypeOfMessage { get }
     var message: String { get }
 }
-
-//extension MessageCardfiable {
-//
-//    func hash(into hasher: inout Hasher) {
-//        hasher.combine(type)
-//        hasher.combine(message)
-//    }
-//
-//    static func == (lhs: any MessageCardfiable, rhs: any MessageCardfiable) -> Bool {
-//        return lhs.type == rhs.type && rhs.message == rhs.message
-//    }
-//}
 
 struct FeedbackMessage: MessageCardfiable {
     
@@ -39,8 +27,7 @@ struct FeedbackMessage: MessageCardfiable {
         self.message = error.localizedDescription
     }
     
-    
-    
+    // MARK: Conformations
     func hash(into hasher: inout Hasher) {
         hasher.combine(type)
         hasher.combine(message)

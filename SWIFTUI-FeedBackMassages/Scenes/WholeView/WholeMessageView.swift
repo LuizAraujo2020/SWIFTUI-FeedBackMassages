@@ -53,9 +53,6 @@ struct WholeMessageView: View {
                 LoadingView()
             }
         }
-//        .onChange(of: wholeMessageView.userError) { newValue in
-//            showError = newValue == nil ?  false : true
-//        }
         .animation(.easeInOut, value: appState.isBusy)
         .animation(.easeInOut, value: wholeMessageViewModel.listUsers)
         .onChange(of: appState.message) { newValue in
