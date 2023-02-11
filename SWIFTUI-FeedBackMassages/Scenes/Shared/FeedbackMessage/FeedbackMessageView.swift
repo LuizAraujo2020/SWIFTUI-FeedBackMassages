@@ -11,10 +11,11 @@ struct FeedbackMessageView: View {
     @State var degrees = Constants.Animations.startDegrees
     @Binding var showMessage: Bool
     
+    let message: FeedbackMessage
+    
     @State private var isRotating = true
     
     private let sizeStandard = CGFloat(100)
-    let message: MessageCardfiable
     
     var body: some View {
         ZStack {
@@ -33,6 +34,7 @@ struct FeedbackMessageView: View {
         .shadow(radius: 20)
         .scaleEffect(CGSize(width: 0.5, height: 0.5))
         .onTapGesture {
+            print("🎁isRotating: \(isRotating)")
             if isRotating {
                 isRotating = false
                 
@@ -70,19 +72,38 @@ struct FeedbackMessageView: View {
     }
     
     @ViewBuilder
+    private func createBackgroundBadge() -> some View {
+        //        guard let message = appState.message else { return }
+        
+        switch message.type {
+        case .successful:
+            RoundedRectangle(cornerRadius: sizeStandard * 0.5)
+                .foregroundColor(.successPure)
+            
+        case .error:
+            RoundedRectangle(cornerRadius: sizeStandard * 0.5)
+                .foregroundColor(.errorPure)
+            
+        case .info:
+            RoundedRectangle(cornerRadius: sizeStandard * 0.5)
+                .foregroundColor(.textLightGray)
+        }
+    }
+    
+    @ViewBuilder
     private func createBadge() -> some View {
         ZStack {
-            RoundedRectangle(cornerRadius: sizeStandard * 0.5)
+            
+            createBackgroundBadge()
                 .frame(width: sizeStandard * 3, height: sizeStandard * 3)
-                .foregroundColor(message.successful ? .successPure : .errorPure)
-                .rotationEffect(.degrees(message.successful ? 0 : 45))
+                .rotationEffect(.degrees(message.type == .error ? 45 : 0))
             
             VStack {
-                message.symbol
+                Image(systemName: message.type.symbol)
                     .font(.system(size: sizeStandard * 1.3))
                     .shadow(radius: 5)
                 
-                Text(message.successful ? "NICE" : "ERROR")
+                Text(message.type.title)
                     .font(.system(size: sizeStandard * 0.35))
                     .fontWeight(.bold)
                     .font(.system(.largeTitle, design: .rounded))
@@ -109,7 +130,7 @@ struct ErrorMessageView: View {
     
     var body: some View {
         if(appState.isBusy){
-            ProgressView()
+            LoadingView()
             
         }else{
             ZStack {
@@ -140,26 +161,40 @@ struct ErrorMessageView: View {
                     rotateMessage()
                 }
                 
-                if appState.showCard {
-                    FeedbackMessageView(showMessage: $appState.showCard, message: VendingMachineError.outOfStock)
+                if appState.showMessage {
+                    FeedbackMessageView(showMessage: $appState.showMessage, message: appState.message!)
+                        
                     
                 }
+            }
+//            .animation(.easeInOut, value: appState.showMessage)
+//            .onAppear {
+//                appState.message = .init(type: .allCases.randomElement()!, message: "Opa! Deu alguma coisa!")
+//            }
+            .onDisappear {
+                appState.dismissMessage()
             }
         }
     }
     
     
     
-    
     fileprivate func rotateMessage() {
+        appState.showMessage.toggle()
         
-        appState.showCard = true
+        if appState.showMessage {
+            appState.message = .init(type: .allCases.randomElement()!, message: "Opa! Deu alguma coisa!")
+            
+        } else {
+            appState.dismissMessage()
+        }
     }
 }
 
 struct ErrorMessage_Previews: PreviewProvider {
     static var previews: some View {
         ErrorMessageView()
+            .environmentObject(AppState())
     }
 }
 

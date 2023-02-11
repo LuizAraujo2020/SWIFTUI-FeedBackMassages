@@ -12,14 +12,14 @@ final class WholeMessageViewModel: ObservableObject {
     @Published var listUsers = Users()
     @Published var userError: UserError?
     
+    private let url = "https://jsonplaceholder.typicode.com/users"
+    
     @MainActor
-    func loadUsers(withError: Bool) async {
+    func loadUsers(withError: Bool) {
         if withError {
             userError = UserError.failedLoading
             
         } else {
-            
-            let url = "https://jsonplaceholder.typicode.com/users"
             
             APIService.shared.loadData(url: url) { (users) in
                 self.listUsers = users

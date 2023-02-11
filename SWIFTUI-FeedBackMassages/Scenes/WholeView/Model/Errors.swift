@@ -7,34 +7,71 @@
 
 import SwiftUI
 
-enum VendingMachineError: Error, MessageCardfiable {
-    var successful: Bool {
-        false
-    }
-    
-    var symbol: Image {
-        switch self {
-        case .invalidSelection: return Image(systemName: "cursorarrow.and.square.on.square.dashed")
-        case .insufficientFunds(coinsNeeded: _): return Image(systemName: "dollarsign.circle")
-        case .outOfStock: return Image(systemName: "shippingbox")
-        }
-    }
-    
-    var message: String {
-        switch self {
-        case .invalidSelection: return "Invalid selection, make sure you have selected the right ones."
-        case .insufficientFunds(coinsNeeded: _): return "Damn, you're broke, go get some job already."
-        case .outOfStock: return "Too  late, we've sold every shit."
-        }
-    }
-    
-    case invalidSelection
-    case insufficientFunds(coinsNeeded: Int)
-    case outOfStock
+protocol MessageCardfiable: Equatable, Hashable {
+    var type: TypeOfMessage { get }
+    var message: String { get }
 }
 
-protocol MessageCardfiable {
-    var successful: Bool { get }
-    var symbol: Image { get }
-    var message: String { get }
+//extension MessageCardfiable {
+//
+//    func hash(into hasher: inout Hasher) {
+//        hasher.combine(type)
+//        hasher.combine(message)
+//    }
+//
+//    static func == (lhs: any MessageCardfiable, rhs: any MessageCardfiable) -> Bool {
+//        return lhs.type == rhs.type && rhs.message == rhs.message
+//    }
+//}
+
+struct FeedbackMessage: MessageCardfiable {
+    
+    let type: TypeOfMessage
+    let message: String
+    
+    init(type: TypeOfMessage, message: String) {
+        self.type    = type
+        self.message = message
+    }
+    
+    init(error: Error) {
+        self.type    = .error
+        self.message = error.localizedDescription
+    }
+    
+    
+    
+    func hash(into hasher: inout Hasher) {
+        hasher.combine(type)
+        hasher.combine(message)
+    }
+    
+    static func == (lhs: FeedbackMessage, rhs: FeedbackMessage) -> Bool {
+        return lhs.type == rhs.type && rhs.message == rhs.message
+    }
+}
+
+enum TypeOfMessage: CaseIterable {
+    
+    case successful
+    case error
+    case info
+    
+    var symbol: String {
+        
+        switch self {
+        case .successful: return "sparkles"
+        case .error: return "xmark.diamond.fill"
+        case .info: return "info.circle"
+        }
+    }
+    
+    var title: String {
+        
+        switch self {
+        case .successful: return "Successful"
+        case .error: return "Error"
+        case .info: return "Info"
+        }
+    }
 }

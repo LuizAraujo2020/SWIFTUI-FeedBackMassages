@@ -16,7 +16,7 @@ struct AlertMessageView: View {
             VStack {
                 if alertMessageViewModel.listPosts.isEmpty {
                     EmptyViewPlaceholder(type: .posts)
-                        .opacity(0.5)
+                        .opacity(Constants.Misc.opacityEmptyView)
                     
                 } else {
                     
@@ -45,21 +45,24 @@ struct AlertMessageView: View {
             }
         }
         .onChange(of: alertMessageViewModel.userError, perform: { newValue in
-            appState.showCard = newValue != nil
+            if newValue != nil {
+                appState.showMessage = true
+                appState.message     = .init(error: alertMessageViewModel.userError!)
+            }
         })
-        .onChange(of: appState.showCard, perform: { newValue in
+        .onChange(of: appState.showMessage, perform: { newValue in
             if !newValue {
                 alertMessageViewModel.userError = nil
             }
         })
-        .alert(alertMessageViewModel.userError?.customMessage ?? "",isPresented: $appState.showCard) {
+        .alert(alertMessageViewModel.userError?.customMessage ?? "",isPresented: $appState.showMessage) {
             Button("Try again") {
                 self.loadUsers(withError: .random())
             }
             Button("Cancel", role: .cancel) { }
         }
         .animation(.easeInOut, value: appState.isBusy)
-        .animation(.easeInOut, value: appState.showCard)
+        .animation(.easeInOut, value: appState.showMessage)
         .animation(.easeInOut, value: alertMessageViewModel.listPosts)
     }
     

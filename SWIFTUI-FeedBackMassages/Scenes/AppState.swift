@@ -5,11 +5,7 @@
 //  Created by Luiz Araujo on 09/02/23.
 //
 
-import SwiftUI
-
-enum UserStateError: Error{
-    case signInError, signOutError
-}
+import Foundation
 
 @MainActor
 class AppState: ObservableObject {
@@ -22,8 +18,16 @@ class AppState: ObservableObject {
     @Published var isBusy = false
     
     /// User Feedback
-    @Published var showCard = false
+    @Published var showMessage = false
+    var message: FeedbackMessage? {
+        didSet {
+            showMessage = message != nil
+        }
+    }
     
+    func dismissMessage() {
+        message = nil
+    }
 //    /// Signing With Apple
 //    var signInWithAppleViewModel = SignInWithAppleViewModel()
 }

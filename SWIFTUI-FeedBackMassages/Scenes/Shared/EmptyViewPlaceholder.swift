@@ -34,7 +34,7 @@ struct EmptyViewPlaceholder: View {
     }
     
     enum TypeOfEmptyView {
-        case user, posts, todos
+        case user, posts, movies
         
         var image: String {
             switch self {
@@ -42,8 +42,8 @@ struct EmptyViewPlaceholder: View {
                 return String("person.crop.circle.badge.questionmark")
             case .posts:
                 return String("bubble.left.and.bubble.right")
-            case .todos:
-                return String("list.clipboard")
+            case .movies:
+                return String("film.stack")
             }
         }
         
@@ -53,12 +53,11 @@ struct EmptyViewPlaceholder: View {
                 return String("No users found, try fetching it up.")
             case .posts:
                 return String("No posts found, try reloading it up.")
-            case .todos:
-                return String("No item found, try again.")
+            case .movies:
+                return String("No movie found, try again.")
             }
         }
     }
-    
 }
 
 struct EmptyViewPlaceholder_Previews: PreviewProvider {

@@ -16,7 +16,7 @@ struct WholeMessageView: View {
             VStack {
                 if wholeMessageViewModel.listUsers.isEmpty {
                     EmptyViewPlaceholder(type: .user)
-                        .opacity(0.5)
+                        .opacity(Constants.Misc.opacityEmptyView)
                     
                 } else {
                     
@@ -56,7 +56,7 @@ struct WholeMessageView: View {
 //            showError = newValue == nil ?  false : true
 //        }
         .animation(.easeInOut, value: appState.isBusy)
-        .animation(.easeInOut, value: appState.showCard)
+        .animation(.easeInOut, value: appState.showMessage)
         .animation(.easeInOut, value: wholeMessageViewModel.listUsers)
     }
     
@@ -66,7 +66,7 @@ struct WholeMessageView: View {
             appState.isBusy = true
             
             try? await Task.sleep(for: .seconds(Constants.Animations.randomDuration)) // timer to fake the network request
-            await wholeMessageViewModel.loadUsers(withError: withError)
+            wholeMessageViewModel.loadUsers(withError: withError)
             
             appState.isBusy = false
         }

@@ -20,11 +20,6 @@ extension APIClient {
     
     typealias JSONTaskCompletionHandler = (Decodable?, APIError?) -> Void
     
-    /// <#Description#>
-    /// - Parameters:
-    ///   - request: <#request description#>
-    ///   - decode: <#decode description#>
-    ///   - completion: <#completion description#>
     func fetch<T: Decodable>(with request: URLRequest,
                              decode: @escaping (Decodable) -> T?,
                              completion: @escaping (Result<T, APIError>) -> Void) {
