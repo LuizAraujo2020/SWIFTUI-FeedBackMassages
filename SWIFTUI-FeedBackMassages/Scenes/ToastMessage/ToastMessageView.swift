@@ -9,9 +9,10 @@ import SwiftUI
 
 struct ToastMessageView: View {
     @EnvironmentObject var appState: AppState
-    private let client = MovieClient()
     @State var movies = [Movie]()
     @State private var showMessage = false
+    
+    private let client = MovieClient()
     
     var body: some View {
         ZStack {
@@ -25,14 +26,18 @@ struct ToastMessageView: View {
                 }
             }
             
-            if let msg = appState.message, showMessage {
-                FeedbackMessageView(showMessage: $showMessage, message: msg)
+//            if let msg = appState.message, showMessage {
+//                FeedbackMessageView(showMessage: $showMessage, message: msg)
+//            }
+            
+            if showMessage {
+                FeedbackMessageView(showMessage: $showMessage, message: appState.message!)
             }
         }
         .onAppear {
             /// Forces a error
             if Bool.random() {
-                appState.message = .init(error: APIError.allCases.randomElement()!)
+                presentMessage(message: .init(type: .allCases.randomElement()!, message: Constants.Texts.loremSmall))
                 
             } else {
                 showMessage      = false
@@ -53,9 +58,30 @@ struct ToastMessageView: View {
                 }
             }
         } // End: onAppear
-        .onChange(of: appState.message) { newValue in
-            showMessage = newValue != nil
+//        .onChange(of: appState.message) { newValue in
+//            showMessage = newValue != nil
+////            if newValue != nil {
+////                showMessage = true
+////            }
+//
+//            print("🚨 showMessage = newValue != nil: \(showMessage)")
+//        }
+        .onDisappear {
+            dismissMessage()
         }
+    }
+    
+    private func presentMessage(message: FeedbackMessage) {
+        
+        appState.message = nil
+        appState.message = message
+        showMessage = true
+    }
+    
+    private func dismissMessage() {
+        
+        appState.message = nil
+        showMessage = false
     }
 }
 
