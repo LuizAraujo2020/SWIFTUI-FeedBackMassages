@@ -36,8 +36,8 @@ struct SWIFTUI_FeedBackMassagesApp: App {
                     }
                 
                 
-                ErrorMessageView()
-//                LoadingView()
+//                ErrorMessageView()
+                LoadingView()
                     .tabItem {
                         Label("Message", systemImage: "greetingcard")
                     }

@@ -10,7 +10,7 @@ import Foundation
 /// Enum that will hold multiple types of errors and will return a description for each of them.
 /// If an error occurs in an URL request it can be for many reasons and
 /// provide detailed information about it, can be very useful for us as developers but also for users.
-enum APIError: Error {
+enum APIError: Error, CaseIterable {
     
     case requestFailed
     case jsonConversionFailure

@@ -18,16 +18,9 @@ class AppState: ObservableObject {
     @Published var isBusy = false
     
     /// User Feedback
-    @Published var showMessage = false
-    var message: FeedbackMessage? {
-        didSet {
-            showMessage = message != nil
-        }
-    }
+//    @Published var showMessage = false
+    var message: FeedbackMessage?
     
-    func dismissMessage() {
-        message = nil
-    }
 //    /// Signing With Apple
 //    var signInWithAppleViewModel = SignInWithAppleViewModel()
 }

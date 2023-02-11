@@ -10,6 +10,7 @@ import SwiftUI
 struct AlertMessageView: View {
     @EnvironmentObject var appState: AppState
     @StateObject var alertMessageViewModel = AlertMessageViewModel()
+    @State private var showMessage = false
     
     var body: some View {
         ZStack {
@@ -46,24 +47,31 @@ struct AlertMessageView: View {
         }
         .onChange(of: alertMessageViewModel.userError, perform: { newValue in
             if newValue != nil {
-                appState.showMessage = true
-                appState.message     = .init(error: alertMessageViewModel.userError!)
+//                showMessage = true
+                appState.message = .init(error: alertMessageViewModel.userError!)
             }
         })
-        .onChange(of: appState.showMessage, perform: { newValue in
+        .onChange(of: showMessage, perform: { newValue in
             if !newValue {
                 alertMessageViewModel.userError = nil
             }
         })
-        .alert(alertMessageViewModel.userError?.customMessage ?? "",isPresented: $appState.showMessage) {
+        .alert(alertMessageViewModel.userError?.customMessage ?? "",isPresented: $showMessage) {
             Button("Try again") {
                 self.loadUsers(withError: .random())
             }
             Button("Cancel", role: .cancel) { }
         }
         .animation(.easeInOut, value: appState.isBusy)
-        .animation(.easeInOut, value: appState.showMessage)
         .animation(.easeInOut, value: alertMessageViewModel.listPosts)
+        .onChange(of: appState.message) { newValue in
+            showMessage = newValue != nil
+        }
+        .onChange(of: showMessage) { newValue in
+            if !newValue {
+                appState.message = nil
+            }
+        }
     }
     
     private func loadUsers(withError: Bool) {
@@ -75,6 +83,13 @@ struct AlertMessageView: View {
             await alertMessageViewModel.loadComments(withError: withError)
             
             appState.isBusy = false
+            
+            if withError {
+                appState.message = FeedbackMessage(error: APIError.allCases.randomElement()!)
+                
+            } else {
+                appState.message = nil
+            }
         }
     }
 }

@@ -96,7 +96,7 @@ struct FeedbackMessageView: View {
             
             createBackgroundBadge()
                 .frame(width: sizeStandard * 3, height: sizeStandard * 3)
-                .rotationEffect(.degrees(message.type == .error ? 45 : 0))
+                .rotationEffect(.degrees(message.type != .info ? 45 : 0))
             
             VStack {
                 Image(systemName: message.type.symbol)
@@ -127,6 +127,7 @@ struct ErrorMessageView: View {
     
     @State private var rotateX = true
     @EnvironmentObject var appState: AppState
+    @State var showMessage: Bool
     
     var body: some View {
         if(appState.isBusy){
@@ -161,18 +162,16 @@ struct ErrorMessageView: View {
                     rotateMessage()
                 }
                 
-                if appState.showMessage {
-                    FeedbackMessageView(showMessage: $appState.showMessage, message: appState.message!)
-                        
-                    
+                if let msg = appState.message, showMessage {
+                    FeedbackMessageView(showMessage: $showMessage, message: msg)
                 }
             }
 //            .animation(.easeInOut, value: appState.showMessage)
 //            .onAppear {
 //                appState.message = .init(type: .allCases.randomElement()!, message: "Opa! Deu alguma coisa!")
 //            }
-            .onDisappear {
-                appState.dismissMessage()
+            .onChange(of: appState.message) { newValue in
+                showMessage = newValue != nil
             }
         }
     }
@@ -180,20 +179,18 @@ struct ErrorMessageView: View {
     
     
     fileprivate func rotateMessage() {
-        appState.showMessage.toggle()
+        showMessage.toggle()
         
-        if appState.showMessage {
+        if showMessage {
             appState.message = .init(type: .allCases.randomElement()!, message: "Opa! Deu alguma coisa!")
             
-        } else {
-            appState.dismissMessage()
         }
     }
 }
 
 struct ErrorMessage_Previews: PreviewProvider {
     static var previews: some View {
-        ErrorMessageView()
+        ErrorMessageView(showMessage: true)
             .environmentObject(AppState())
     }
 }

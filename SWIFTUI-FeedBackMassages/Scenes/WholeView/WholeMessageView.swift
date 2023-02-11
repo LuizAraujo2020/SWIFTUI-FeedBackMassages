@@ -10,6 +10,7 @@ import SwiftUI
 struct WholeMessageView: View {
     @EnvironmentObject var appState: AppState
     @StateObject var wholeMessageViewModel = WholeMessageViewModel()
+    @State private var showMessage = false
     
     var body: some View {
         ZStack {
@@ -56,8 +57,10 @@ struct WholeMessageView: View {
 //            showError = newValue == nil ?  false : true
 //        }
         .animation(.easeInOut, value: appState.isBusy)
-        .animation(.easeInOut, value: appState.showMessage)
         .animation(.easeInOut, value: wholeMessageViewModel.listUsers)
+        .onChange(of: appState.message) { newValue in
+            showMessage = newValue != nil
+        }
     }
     
     private func loadUsers(withError: Bool) {
