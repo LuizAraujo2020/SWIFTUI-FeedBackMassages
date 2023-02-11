@@ -43,7 +43,7 @@ struct ToastMessageView: View {
                 showMessage      = false
                 appState.message = nil
                 
-                client.getFeed(from: .topRated) { result in
+                client.getFeed(from: .nowPlaying) { result in
                     switch result {
                     case .success(let movieFeedResult):
                         

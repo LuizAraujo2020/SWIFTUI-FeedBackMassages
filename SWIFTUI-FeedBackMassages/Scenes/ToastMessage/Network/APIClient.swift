@@ -23,7 +23,7 @@ extension APIClient {
     func fetch<T: Decodable>(with request: URLRequest,
                              decode: @escaping (Decodable) -> T?,
                              completion: @escaping (Result<T, APIError>) -> Void) {
-        
+        print("❤️ \(request)")
         /// A a task from the helper below, passing as a parameter for decodingType the type that this function will decode `T`.
         let task = decodingTask(with: request, decodingType: T.self) { (json , error) in
             

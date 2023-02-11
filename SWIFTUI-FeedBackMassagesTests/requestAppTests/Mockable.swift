@@ -7,6 +7,7 @@
 
 import XCTest
 
+/// A protocol for converting JSON files to Codable.
 final class Mockable: XCTestCase {
 
     override func setUpWithError() throws {

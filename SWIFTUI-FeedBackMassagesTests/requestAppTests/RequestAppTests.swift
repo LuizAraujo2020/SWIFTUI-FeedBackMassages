@@ -7,6 +7,7 @@
 
 import XCTest
 
+/// Class responsible for performing app tests.
 final class RequestAppTests: XCTestCase {
 
     override func setUpWithError() throws {
