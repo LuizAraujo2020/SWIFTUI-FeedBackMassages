@@ -24,7 +24,6 @@
 - [x] Views hierarchy
 - [x] MVVM Pattern
 - [x] Singleton Pattern
-- [ ] Dependency Injection
 - [ ] S.O.L.I.D.
 - [x] API request in a simple way
 - [x] Generic API request
